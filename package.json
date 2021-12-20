@@ -1,0 +1,27 @@
+{
+  "name": "messages",
+  "displayName": "Messages",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.58.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./build/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "messages.showChoices",
+        "title": "Show Choices"
+      }
+    ],
+    "configuration": {
+      "title": "Messages",
+      "properties": {}
+    }
+  },
+  "activationEvents": [
+    "onCommand:messages.showChoices"
+  ]
+}
