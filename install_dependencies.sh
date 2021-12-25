@@ -9,7 +9,7 @@ chmod u+x joern-install.sh
 cd ..
 
 # INSTALL CHEQUE
-# Cheque requires GoLang to be built:
+# GoLang is required for Cheque to be built:
 sudo add-apt-repository ppa:longsleep/golang-backports
 sudo apt update
 sudo apt install golang-go

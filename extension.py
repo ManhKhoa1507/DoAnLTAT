@@ -64,7 +64,7 @@ def static_code_analyst(location):
 
 def dependency_check(dir):
     if (os.path.exists(dir) == True):
-        subprocess.run(["/home/kali/Desktop/Code/SAST_DC_plugin/cheque/cheque", "-cheque-scan", dir, "-export-sbom"], cwd = os.getcwd())
+        subprocess.run([os.getcwd() + "/cheque/cheque", "-cheque-scan", dir, "-export-sbom"])
         vscode.window.show_info_message("A CycloneDX SBOM file has been exported")
         
 @ext.event
