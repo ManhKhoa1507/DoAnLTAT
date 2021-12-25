@@ -1,0 +1,48 @@
+{
+  "name": "g03",
+  "displayName": "G03 Static Application Secure Testing",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.58.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "g03.messageSayConfig",
+        "title": "Message Say Config"
+      },
+      {
+        "command": "g03.menu",
+        "title": "Menu"
+      }
+    ],
+    "configuration": {
+      "title": "G03 Static Application Secure Testing",
+      "properties": {
+        "g03.setting": {
+          "description": "Plugin Settings",
+          "type": "string",
+          "default": "./"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "g03.messageSayConfig",
+        "key": "ALT+S"
+      },
+      {
+        "command": "g03.menu",
+        "key": "ALT+5"
+      }
+    ]
+  },
+  "main": "./build/extension.js",
+  "activationEvents": [
+    "onCommand:g03.messageSayConfig",
+    "onCommand:g03.menu"
+  ]
+}

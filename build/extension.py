@@ -1,3 +1,6 @@
+# Built using vscode-ext
+
+import sys
 import vscode
 import joern
 import os
@@ -64,7 +67,7 @@ def static_code_analyst(location):
 
 def dependency_check(dir):
     if (os.path.exists(dir) == True):
-        subprocess.run(["cheque/cheque", "-cheque-scan", dir, "-export-sbom"], cwd = os.getcwd())
+        subprocess.run(["../cheque/cheque", "-cheque-scan", dir, "-export-sbom"], cwd = os.getcwd())
         vscode.window.show_info_message("A CycloneDX SBOM file has been exported")
         
 @ext.event
@@ -122,4 +125,9 @@ def menu():
 
 # Build extension and theme
 vscode.build_theme(theme)
-vscode.build(ext)
+
+
+def ipc_main():
+    globals()[sys.argv[1]]()
+
+ipc_main()
