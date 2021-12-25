@@ -64,7 +64,7 @@ def static_code_analyst(location):
 
 def dependency_check(dir):
     if (os.path.exists(dir) == True):
-        subprocess.run(["cheque/cheque", "-cheque-scan", dir, "-export-sbom"])
+        subprocess.run([os.getcwd() + "/cheque/cheque", "-cheque-scan", dir, "-export-sbom"])
         vscode.window.show_info_message("A CycloneDX SBOM file has been exported")
         
 @ext.event
