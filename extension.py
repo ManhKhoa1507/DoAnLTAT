@@ -10,7 +10,11 @@ c = Config(name="setting", description="Plugin Settings",
 
 # Build extension
 ext = vscode.Extension(
-    name="messages", display_name="Messages", version="0.0.1", config=[c])
+    name = "g03",
+    display_name = "G03 Static Application Secure Testing",
+    version = "0.0.1",
+    config = [c]
+    )
 
 # Build theme
 theme = vscode.ColorTheme(
@@ -58,7 +62,11 @@ def static_code_analyst(location):
 
 # Noti the extension
 
-
+def dependency_check(dir):
+    if (os.path.exists(dir) == True):
+        subprocess.run(["cheque/cheque", "-cheque-scan", dir, "-export-sbom"])
+        vscode.window.show_info_message("A CycloneDX SBOM file has been exported")
+        
 @ext.event
 def on_activate():
     return f"The extension {ext.name} has started"
@@ -76,32 +84,41 @@ def message_say_config():
 
 
 @ext.command(keybind="ALT+5")
-def show_choices():
-    # This works the same with warning and error
-    choice = vscode.window.show_info_message(
-        "Which scan?", "SAST", "Dependency-Check", "Both")
-
-    # if not choice anything
-    if not choice:
+def menu():
+    selection = vscode.window.show_quick_pick(
+        [
+            vscode.window.QuickPickItem(label = "G03 Static Code Analysis", detail = "Perform static code analysis on source code."),
+            vscode.window.QuickPickItem(label = "G03 Dependency Check", detail = "Perform dependency check on a project"),
+            vscode.window.QuickPickItem(label = "Both", detail = "Perform both Static code analysis and Dependency check")
+        ]
+    )
+    if not selection:
         return
 
-    # if run SAST
-    elif choice == "SAST":
-
+    elif selection.label == "G03 Static Code Analysis":
         # Get file to scan
         location = vscode.window.show_input_box()
 
         # vscode.window.show_info_message("Source code location: ", location)
         static_code_analyst(location)
 
-    # if run Dependency-check
-    elif choice == "Dependency-check":
-        vscode.window.show_info_message("Dependency-Check using Safety")
+    elif selection.label == "G03 Dependency Check":
+        # Choose workspace folder to perform dependency check on
+        dir = vscode.window.show_workspace_folder_pick()
+        dir_path = dir["uri"]["path"]
 
-    # if run both
-    elif choice == "Both":
-        vscode.window.show_info_message("Safety & Joern")
+        # Perform dependency check
+        dependency_check(dir_path)
+    
+    elif selection.label == "Both":
+        # SAST
+        location = vscode.window.show_input_box()
+        static_code_analyst(location)
 
+        # Dependency check
+        dir = vscode.window.show_workspace_folder_pick()
+        dir_path = dir["uri"]["path"]
+        dependency_check(dir_path)
 
 # Build extension and theme
 vscode.build_theme(theme)

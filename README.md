@@ -1,18 +1,16 @@
 # About
-Create extension that run SAST (Static Application Security Scan) and Dependency-Check
+Create extension that run SAST (Static Application Security Scan) and Dependency-Check using Joern and Cheque
 
 This is a VSCode extension made using 
 - [vscode-ext](https://github.com/CodeWithSwastik/vscode-ext)
+- [Joern](https://github.com/joernio/joern)
+- [Cheque](https://github.com/sonatype-nexus-community/cheque)
 
-- [joern](https://github.com/joernio/joern)
-
-# Install joern
+# Install dependencies
 ```bash
-chmod +x install_joern
-./install_joern
+chmod +x install_dependencies.sh
+./install_dependencies.sh
 ```
-
-Wait a few minutes to install joern
 
 # Run code
 Build code
