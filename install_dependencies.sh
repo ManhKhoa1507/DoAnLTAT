@@ -17,4 +17,4 @@ sudo apt install golang-go
 # Build Cheque
 git clone https://github.com/sonatype-nexus-community/cheque.git
 cd cheque
-go build
+sudo go build
